@@ -1,9 +1,29 @@
 # IIWA_ROS2 #
-[![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+<!-- [![Licence](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![DOI](https://zenodo.org/badge/470651211.svg)](https://zenodo.org/badge/latestdoi/470651211)
-[![CI](https://github.com/ICube-Robotics/iiwa_ros2/actions/workflows/ci.yaml/badge.svg)](https://github.com/ICube-Robotics/iiwa_ros2/actions/workflows/ci.yaml)
+[![CI](https://github.com/ICube-Robotics/iiwa_ros2/actions/workflows/ci.yaml/badge.svg)](https://github.com/ICube-Robotics/iiwa_ros2/actions/workflows/ci.yaml) -->
 
 ROS2 stack for KUKA iiwa 14 collaborative robots. This package contains launch and configuration setups to quickly get started using the driver.
+## Install ##
+## Sunrise Application ##
+1. 	Install Sunrise Workbench with SmartServo/Connectivity: You’ll need a compatible version of KUKA Sunrise Workbench (e.g., 1.13–1.15) with the Connectivity or SmartServo module installed  ￼.
+2. Enable FRI on the robot: Install and configure the Fast Robot Interface (FRI) via Sunrise Workbench:
+	-	Open StationSetup.cat → select the Software tab → enable the Fast Robot Interface Extension and Smart Servo component  ￼ ￼ ￼.
+3.	Import the iiwa_ros2 Java application
+	-	In your KUKA Java project (Sunrise), create a project using Workbench.
+	-	From iiwa_ros2/iiwa_sunrise/application, copy iiwa_ros2.java and any supporting files into your <sunrise_project>/src/application folder.
+	-	Also import any required .java libraries (e.g., KUKAJavaLib or GRL classes) and configure your build path  ￼ ￼ ￼.
+4.	Configure application parameters: Within the Java application or its .data.xml, set:
+	-	CLIENT_IP to your ROS PC’s KONI interface: 
+        - Robot : `IP = 192.170.10.2`, `SubnetMask = FFFFFF00`
+        - Control PC : `IP = 192.170.10.5`, `SubnetMask = FFFFFF00`
+	-	INITIAL_POSITION joints per iiwa_description/config/initial_positions.yaml
+	-	TS (communication period), typically 5 ms for real-time control  ￼ ￼.
+5.	Install & sync to cabinet
+	-	In Workbench: open StationSetup.cat → go to the Installation tab → click Install.
+	-	Then click Sync to upload the project to the robot  ￼.
+	-	You should now see the “iiwa_ros2” application on the robot’s SmartPad.
+
 
 ## Features ##
 - integration with `ros2_control`
