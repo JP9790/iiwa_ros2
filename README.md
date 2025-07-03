@@ -4,6 +4,12 @@
 [![CI](https://github.com/ICube-Robotics/iiwa_ros2/actions/workflows/ci.yaml/badge.svg)](https://github.com/ICube-Robotics/iiwa_ros2/actions/workflows/ci.yaml) -->
 
 ROS2 stack for KUKA iiwa 14 collaborative robots. This package contains launch and configuration setups to quickly get started using the driver.
+## Available Packages in this Repository ##
+- `iiwa_bringup` - launch and run-time configurations
+- `iiwa_controllers` - implementation of dedicated controllers
+- `iiwa_description` - robot description and configuration files
+- `iiwa_hardware` - hardware interfaces for communication with the robot
+- `iiwa_moveit2` - some tools for Moveit2 integration
 ## Install ##
 ## Sunrise Application ##
 1. 	Install Sunrise Workbench with SmartServo/Connectivity: You’ll need a compatible version of KUKA Sunrise Workbench (e.g., 1.13–1.15) with the Connectivity or SmartServo module installed  ￼.
@@ -23,25 +29,13 @@ ROS2 stack for KUKA iiwa 14 collaborative robots. This package contains launch a
 	-	In Workbench: open StationSetup.cat → go to the Installation tab → click Install.
 	-	Then click Sync to upload the project to the robot  ￼.
 	-	You should now see the “iiwa_ros2” application on the robot’s SmartPad.
+**NOTE:** Depending on you application, the following parameters need to be tuned in the application:
+- `INITIAL_POSITION` (default: same as `iiwa_description/config/initial_positions.yaml`) - the initial joint configuration of the robot/
+- `CLIENT_IP` (default: `192.170.10.5`) - IP of the control PC allowed to send data to the robot.
+- `TS` (default: 5ms) - Communication period. The robot throws an Error if no data received during the specified period.
 
 
-## Features ##
-- integration with `ros2_control`
-- robot drivers for KUKA Fast Robot Interface (FRI) protocol for position, velocity and torque control
-- dedicated sensors and broadcasters to get data from the robot
-- dedicated controllers
-- integration with Gazebo
-- integration with Moveit2 (OMPL, PILZ and servo)
-
-## Available Packages in this Repository ##
-- `iiwa_bringup` - launch and run-time configurations
-- `iiwa_controllers` - implementation of dedicated controllers
-- `iiwa_description` - robot description and configuration files
-- `iiwa_hardware` - hardware interfaces for communication with the robot
-- `iiwa_moveit2` - some tools for Moveit2 integration
-
-## Getting Started
-***Required setup : Ubuntu 22.04 LTS***
+## Ubuntu ##
 
 1.  Install `ros2` packages. The current development is based of `ros2 humble`. Installation steps are described [here](https://docs.ros.org/en/humble/Installation.html).
 2. Source your `ros2` environment:
@@ -69,35 +63,6 @@ ROS2 stack for KUKA iiwa 14 collaborative robots. This package contains launch a
 **NOTE:** The `iiwa_ros2.repos` file contains links to ros2 packages that need to be source-built to use their newest features.
 
 ## Usage
-
-:warning: **SAFETY FIRST**:warning:
-*An industrial robot is not a toy and you may harm yourself due to misuse. In general it is best practice to test your code at first in simulation and then in low speed (**T1**) mode. Before using the robot, make yourself familiar with the safety instructions provided by the KUKA manuals.*
-
-### On the Robot side:
-**Step 1:** The used drivers allow the communication with the KUKA *iiwa* robot using KUKA's **Fast Robot Interface (FRI)**. Therefore, the `Fast Robot Interface Extension` needs to be installed and configured on the robot.
-
-**HINT:** In the proposed default setup of this package, the robot and the control PC are communicating through FRI on the `KUKA Option Network Interface` (KONI) with the following setup:
-- Robot : `IP = 192.170.10.2`, `SubnetMask = FFFFFF00`
-- Control PC : `IP = 192.170.10.5`, `SubnetMask = FFFFFF00`
-
-For further instructions concerning the installation and setup of FRI, please refer to KUKA FRI documentation.
-
-**Step 2:** This step consists in installing the `iiwa_ros2.java` application from the `iiwa_sunrise` directory in the `application` package of your robot Sunrise Project. This application allows you to establish a communication with the control PC and initialize one of the following control modes:
-- `POSITION` - position and velocity commands can be passed to the robot and executed, the robot sends its current status
-- `TORQUE` - torque commands can be passed to the robot and executed, the robot sends its current status
-- `MONITORING` - no commands can be passed to the robot, the robot only sends its current status
-
-**NOTE:** Depending on you application, the following parameters need to be tuned in the application:
-- `INITIAL_POSITION` (default: same as `iiwa_description/config/initial_positions.yaml`) - the initial joint configuration of the robot/
-- `CLIENT_IP` (default: `192.170.10.5`) - IP of the control PC allowed to send data to the robot.
-- `TS` (default: 5ms) - Communication period. The robot throws an Error if no data received during the specified period.
-
-**NOTE:** For torque mode, there has to be a command value at least all 5ms.
-
-
-**Step 3:** To control the robot using `iiwa_ros2` execute the application on the robot and select the desired control mode.
-
-**NOTE:** All security modes (T1, T2, AUTO) are supported.
 
 ### On ROS2 side:
 The `iiwa_bringup` package contains 3 main launch files: 2 examples and the main driver launcher
@@ -164,10 +129,10 @@ In order for Gazebo to find the robot model from the `iiwa_ros2` stack it needs 
 $ source /usr/share/gazebo/setup.sh
 $ export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/path/to/iiwa_ros2
 ```
-**NOTE**: If you encounter issues with spawning the robot to Gazebo making it crash, make sure your models are well referenced.
+<!-- **NOTE**: If you encounter issues with spawning the robot to Gazebo making it crash, make sure your models are well referenced.
 ## Contacts ##
 ![icube](https://icube.unistra.fr/fileadmin/templates/DUN/icube/images/logo.png)
 
 [ICube Laboratory](https://icube.unistra.fr), [University of Strasbourg](https://www.unistra.fr/), France
 
-__Maciej Bednarczyk:__ [m.bednarczyk@unistra.fr](mailto:m.bednarczyk@unistra.fr), @github: [mcbed](mailto:macbednarczyk@gmail.com)
+__Maciej Bednarczyk:__ [m.bednarczyk@unistra.fr](mailto:m.bednarczyk@unistra.fr), @github: [mcbed](mailto:macbednarczyk@gmail.com) -->
